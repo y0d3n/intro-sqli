@@ -1,0 +1,44 @@
+services:
+  practice:
+    build: practice
+    ports:
+      - "8081:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+  blind:
+    build: blind
+    ports:
+      - "8082:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+  bypass:
+    build: bypass
+    ports:
+      - "8083:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysql",
+          "-uy0d3n",
+          "-ppasswd",
+          "-e",
+          "use db"
+        ]
+      interval: 1s
+      timeout: 5s
+      retries: 60
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd
+      MYSQL_USER: y0d3n
+      MYSQL_PASSWORD: passwd
