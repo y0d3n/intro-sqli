@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bypass</title>
+</head>
+
+<body>
+    <form>
+        <select name="id">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <input type="submit" value="決定">
+        <p>
+            <%= msg %>
+        </p>
+        <p>
+            <%= query %>
+        </p>
+    </form>
+    <hr>
+    <table border=1>
+        <tr>
+            <th>ID</th>
+            <th>userID</th>
+        </tr>
+        <% for (let user of users) { %>
+            <tr>
+                <td>
+                    <%= user.id %>
+                </td>
+                <td>
+                    <%= user.username %>
+                </td>
+            </tr>
+        </%>
+        <% } %></%>
+    </table>
+</body>
+
+</html>

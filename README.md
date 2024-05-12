@@ -1,4 +1,4 @@
-# intro-xss
+# intro-sqli
 
 SQLインジェクションの体験用
 

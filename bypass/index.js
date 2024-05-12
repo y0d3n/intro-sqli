@@ -74,4 +74,25 @@ app.get("/shopping_quot", (req, res) => {
   });
 });
 
+const length = "IDは1文字のみです";
+app.get("/users_length", (req, res) => {
+  const id = req.query.id ?? "1";
+  if (typeof id !== "string") {
+    return res.send("error")
+  }
+  if (id.length > 1) {
+    return res.send(length);
+  }
+  const query = `SELECT id,username FROM users WHERE id = '${id}';`;
+
+  conn.query(query, (e, results) => {
+    if (e) return res.send(e);
+    return res.render("users.ejs", {
+      users: results,
+      query: query,
+      msg: length
+    });
+  });
+});
+
 app.listen(3000);
