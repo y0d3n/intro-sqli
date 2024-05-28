@@ -77,9 +77,6 @@ app.get("/shopping_quot", (req, res) => {
 const length = "IDは1文字のみです";
 app.get("/users_length", (req, res) => {
   const id = req.query.id ?? "1";
-  if (typeof id !== "string") {
-    return res.send("error");
-  }
   if (id.length > 1) {
     return res.send(length);
   }
